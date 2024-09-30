@@ -153,7 +153,9 @@ lr_hear_pos, lr_hear_neg, falsos_positivos_hear, falsos_negativos_hear = calcula
     sensibilidad_hear, especificidad_hear, prevalencia, total_pacientes
 )
 st.write("**HEAR Score**")
-st.write(f"LR(+): {lr_hear_pos:.2f}, LR(-): {lr_hear_neg:.2
+st.write(f"LR(+): {lr_hear_pos:.2f}, LR(-): {lr_hear_neg:.2f}")
+st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_hear:.0f}")
+st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_hear:.0f}")
 
 
 
