@@ -194,6 +194,16 @@ if acepta_descargo:
         prevalencia = 0.15
         total_pacientes = 1000
 
+        # Definir sensibilidad y especificidad para cada score
+        sensibilidad_heart = 0.90
+        especificidad_heart = 0.80
+
+        sensibilidad_edacs = 0.97
+        especificidad_edacs = 0.58
+
+        sensibilidad_hear = 0.91
+        especificidad_hear = 0.71
+
         # Cálculos de HEART
         lr_heart_pos, lr_heart_neg, falsos_positivos_heart, falsos_negativos_heart = calcular_valores_diagnosticos(
             sensibilidad_heart, especificidad_heart, prevalencia, total_pacientes
