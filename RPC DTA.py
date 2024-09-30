@@ -136,3 +136,4 @@ falsos_positivos = (1 - especificidad) * (1 - prevalencia) * total_pacientes
 
 st.write(f"Falsos positivos: {falsos_positivos}")
 st.write(f"Falsos negativos: {falsos_negativos}")
+
