@@ -191,7 +191,7 @@ if acepta_descargo:
         st.write(f"Puntuación HEAR: {hear_score} (Riesgo de MACE: {riesgo_mace_hear(hear_score)})")
         st.write(f"Puntuación EDACS: {edacs_score} (Riesgo de MACE: {riesgo_mace_edacs(edacs_score)})")
 
-        st.header("Cálculo de riesgo de MACE y valores diagnósticos")
+        st.header("Cocientes de probabilidad y estimación de efectos absolutos de aplicar las escalas, prevalencia de infarto miocardico 15%, n=1000")
         prevalencia = 0.15
         total_pacientes = 1000
 
