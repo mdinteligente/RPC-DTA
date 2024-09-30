@@ -191,7 +191,7 @@ if acepta_descargo:
         st.write(f"Puntuación HEAR: {hear_score} (Riesgo de MACE: {riesgo_mace_hear(hear_score)})")
         st.write(f"Puntuación EDACS: {edacs_score} (Riesgo de MACE: {riesgo_mace_edacs(edacs_score)})")
 
-        st.header("Cocientes de probabilidad y estimación de efectos absolutos de aplicar las escalas, prevalencia de infarto miocardico 15%, n=1000")
+        st.header("Cálculo de riesgo de MACE y valores diagnósticos")
         prevalencia = 0.15
         total_pacientes = 1000
 
@@ -235,11 +235,12 @@ if acepta_descargo:
         # Agregar referencias
         st.header("Referencias")
         st.write("""
-        1.O'Rielly CM, Harrison TG, Andruchow JE, Ronksley PE, Sajobi T, Robertson HL, Lorenzetti D, McRae AD. Risk Scores for Clinical Risk Stratification of Emergency Department Patients With Chest Pain but No Acute Myocardial Infarction: A Systematic Review. Can J Cardiol. 2023 Mar;39(3):304-310. doi: 10.1016/j.cjca.2022.12.028  
-        2.Khaleghi Rad M, Pirmoradi MM, Doosti-Irani A, Thiruganasambandamoorthy V, Mirfazaelian H. The performance of HEAR score for identification of low-risk chest pain: a systematic review and meta-analysis. Eur J Emerg Med. 2022 Jun 1;29(3):173-187. doi: 10.1097/MEJ.00000000000009213.
-        3.Wang M, Hu Z, Miao L, Shi M, Gao Q. A systematic review of the applicability of emergency department assessment of chest pain score-accelerated diagnostic protocol for risk stratification of patients with chest pain. Clin Cardiol. 2023 Nov;46(11):1303-1309. doi: 10.1002/clc.24126.
+        1. O'Rielly CM, Harrison TG, Andruchow JE, Ronksley PE, Sajobi T, Robertson HL, Lorenzetti D, McRae AD. Risk Scores for Clinical Risk Stratification of Emergency Department Patients With Chest Pain but No Acute Myocardial Infarction: A Systematic Review. Can J Cardiol. 2023 Mar;39(3):304-310. doi: 10.1016/j.cjca.2022.12.028.
+        
+        2. Khaleghi Rad M, Pirmoradi MM, Doosti-Irani A, Thiruganasambandamoorthy V, Mirfazaelian H. The performance of HEAR score for identification of low-risk chest pain: a systematic review and meta-analysis. Eur J Emerg Med. 2022 Jun 1;29(3):173-187. doi: 10.1097/MEJ.00000000000009213.
+        
+        3. Wang M, Hu Z, Miao L, Shi M, Gao Q. A systematic review of the applicability of emergency department assessment of chest pain score-accelerated diagnostic protocol for risk stratification of patients with chest pain. Clin Cardiol. 2023 Nov;46(11):1303-1309. doi: 10.1002/clc.24126.
         """)
-
 
 
 
