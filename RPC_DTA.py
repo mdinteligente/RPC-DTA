@@ -130,15 +130,6 @@ if acepta_descargo:
     if usuario == "javierapp" and clave == "rpcdta":
         st.success("Acceso permitido")
 
-        # Preguntar al usuario qué tipo de ensayo va a usar
-        ensayo = st.radio("Seleccione el tipo de ensayo que va a usar:", ["T", "I"])
-
-        # Preguntar si el P99 es global o específico para hombre o mujer
-        referencia_P99 = st.radio("Seleccione el tipo de referencia P99:", ["Global", "Hombre", "Mujer"])
-
-        # Pedir al usuario que seleccione las unidades del P99 que reporta el laboratorio
-        unidad_troponina = st.radio("Seleccione las unidades del P99 reportadas por su laboratorio:", ["ng/mL", "pg/mL"])
-
         # Preguntas clínicas
         st.header("Preguntas Clínicas")
         edad = st.number_input("Edad del paciente", min_value=18, max_value=120)
@@ -171,8 +162,18 @@ if acepta_descargo:
         ekg = st.radio("Seleccione el hallazgo en el EKG:", ["Normal (0)", "No desviación del ST pero BRI, HVI, repolarización (1)", "Desviación del ST no debida a BRI, HVI, o digoxina (2)"])
         ekg = int(ekg.split("(")[-1].replace(")", ""))
 
-        # Troponina de alta sensibilidad
+        # Sección de troponinas
         st.header("Troponina de alta sensibilidad")
+        
+        # Preguntar al usuario qué tipo de ensayo va a usar
+        ensayo = st.radio("Seleccione el tipo de ensayo que va a usar:", ["T", "I"])
+
+        # Preguntar si el P99 es global o específico para hombre o mujer
+        referencia_P99 = st.radio("Seleccione el tipo de referencia P99:", ["Global", "Hombre", "Mujer"])
+
+        # Pedir al usuario que seleccione las unidades del P99 que reporta el laboratorio
+        unidad_troponina = st.radio("Seleccione las unidades del P99 reportadas por su laboratorio:", ["ng/mL", "pg/mL"])
+
         troponina = st.number_input("Valor de la primera troponina de alta sensibilidad", min_value=0.0, format="%.2f")
         troponina = leer_valor_decimal(str(troponina))
         troponina = convertir_a_ngL(troponina, unidad_troponina)  # Conversión de unidades si es necesario
@@ -230,6 +231,15 @@ if acepta_descargo:
         st.write(f"LR(+): {lr_hear_pos:.2f}, LR(-): {lr_hear_neg:.2f}")
         st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_hear:.0f}")
         st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_hear:.0f}")
+
+        # Agregar referencias
+        st.header("Referencias")
+        st.write("""
+        1.O'Rielly CM, Harrison TG, Andruchow JE, Ronksley PE, Sajobi T, Robertson HL, Lorenzetti D, McRae AD. Risk Scores for Clinical Risk Stratification of Emergency Department Patients With Chest Pain but No Acute Myocardial Infarction: A Systematic Review. Can J Cardiol. 2023 Mar;39(3):304-310. doi: 10.1016/j.cjca.2022.12.028  
+        2.Khaleghi Rad M, Pirmoradi MM, Doosti-Irani A, Thiruganasambandamoorthy V, Mirfazaelian H. The performance of HEAR score for identification of low-risk chest pain: a systematic review and meta-analysis. Eur J Emerg Med. 2022 Jun 1;29(3):173-187. doi: 10.1097/MEJ.00000000000009213.
+        3.Wang M, Hu Z, Miao L, Shi M, Gao Q. A systematic review of the applicability of emergency department assessment of chest pain score-accelerated diagnostic protocol for risk stratification of patients with chest pain. Clin Cardiol. 2023 Nov;46(11):1303-1309. doi: 10.1002/clc.24126.
+        """)
+
 
 
 
