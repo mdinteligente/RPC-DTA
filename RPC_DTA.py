@@ -67,6 +67,31 @@ def calcular_valores_diagnosticos(sensibilidad, especificidad, prevalencia, tota
     falsos_positivos = (1 - especificidad) * (1 - prevalencia) * total_pacientes
     return lr_positivo, lr_negativo, falsos_positivos, falsos_negativos
 
+# Función para determinar el riesgo de MACE basado en el puntaje
+def riesgo_mace_heart(score):
+    if score <= 3:
+        return "Bajo"
+    elif 4 <= score <= 6:
+        return "Medio"
+    else:
+        return "Alto"
+
+def riesgo_mace_hear(score):
+    if score <= 3:
+        return "Bajo"
+    elif 4 <= score <= 6:
+        return "Medio"
+    else:
+        return "Alto"
+
+def riesgo_mace_edacs(score):
+    if score < 16:
+        return "Bajo"
+    elif 16 <= score <= 20:
+        return "Medio"
+    else:
+        return "Alto"
+
 # Interfaz de usuario con Streamlit
 st.title("Calculadora de HEART, HEAR y EDACS Score")
 
@@ -97,9 +122,9 @@ hear_score = calcular_HEAR_score(edad, historia_clinica, ekg, factores_riesgo)
 edacs_score = calcular_EDACS_score(edad, sexo, diaforesis, irradiacion, inspiracion, palpacion)
 
 # Mostrar resultados de las puntuaciones
-st.write(f"Puntuación HEART: {heart_score}")
-st.write(f"Puntuación HEAR: {hear_score}")
-st.write(f"Puntuación EDACS: {edacs_score}")
+st.write(f"Puntuación HEART: {heart_score} (Riesgo de MACE: {riesgo_mace_heart(heart_score)})")
+st.write(f"Puntuación HEAR: {hear_score} (Riesgo de MACE: {riesgo_mace_hear(hear_score)})")
+st.write(f"Puntuación EDACS: {edacs_score} (Riesgo de MACE: {riesgo_mace_edacs(edacs_score)})")
 
 st.header("Cálculo de riesgo de MACE y valores diagnósticos")
 prevalencia = 0.15
@@ -128,9 +153,8 @@ lr_hear_pos, lr_hear_neg, falsos_positivos_hear, falsos_negativos_hear = calcula
     sensibilidad_hear, especificidad_hear, prevalencia, total_pacientes
 )
 st.write("**HEAR Score**")
-st.write(f"LR(+): {lr_hear_pos:.2f}, LR(-): {lr_hear_neg:.2f}")
-st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_hear:.0f}")
-st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_hear:.0f}")
+st.write(f"LR(+): {lr_hear_pos:.2f}, LR(-): {lr_hear_neg:.2
+
 
 
 
