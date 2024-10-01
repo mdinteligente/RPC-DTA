@@ -14,10 +14,10 @@ ensayos_troponinas = {
     }
 }
 
-# Función para convertir de ng/mL a ng/L
+# Función para convertir de ng/mL a ng/L (sin aproximaciones)
 def convertir_a_ngL(valor, unidad):
     if unidad == "ng/mL":
-        return valor * 1000  # Conversión de ng/mL a pg/mL
+        return valor * 1000  # Conversión exacta de ng/mL a pg/mL (ng/L)
     return valor  # Si es pg/mL, ya está en ng/L
 
 # Función para seleccionar el valor de P99 según el tipo de ensayo y el género
@@ -211,8 +211,8 @@ if acepta_descargo:
         )
         st.write("**HEART Score**")
         st.write(f"LR(+): {lr_heart_pos:.2f}, LR(-): {lr_heart_neg:.2f}")
-        st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_heart:.0f}")
-        st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_heart:.0f}")
+        st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_heart}")
+        st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_heart}")
 
         # Cálculos de EDACS
         lr_edacs_pos, lr_edacs_neg, falsos_positivos_edacs, falsos_negativos_edacs = calcular_valores_diagnosticos(
@@ -220,8 +220,8 @@ if acepta_descargo:
         )
         st.write("**EDACS Score**")
         st.write(f"LR(+): {lr_edacs_pos:.2f}, LR(-): {lr_edacs_neg:.2f}")
-        st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_edacs:.0f}")
-        st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_edacs:.0f}")
+        st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_edacs}")
+        st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_edacs}")
 
         # Cálculos de HEAR
         lr_hear_pos, lr_hear_neg, falsos_positivos_hear, falsos_negativos_hear = calcular_valores_diagnosticos(
@@ -229,8 +229,8 @@ if acepta_descargo:
         )
         st.write("**HEAR Score**")
         st.write(f"LR(+): {lr_hear_pos:.2f}, LR(-): {lr_hear_neg:.2f}")
-        st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_hear:.0f}")
-        st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_hear:.0f}")
+        st.write(f"Falsos positivos por cada 1000 pacientes: {falsos_positivos_hear}")
+        st.write(f"Falsos negativos por cada 1000 pacientes: {falsos_negativos_hear}")
 
         # Agregar referencias
         st.header("Referencias")
