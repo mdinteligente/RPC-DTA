@@ -14,7 +14,7 @@ ensayos_troponinas = {
     }
 }
 
-# Función para convertir de ng/mL a ng/L (sin aproximaciones)
+# Función para convertir de ng/mL a ng/L sin realizar ninguna aproximación
 def convertir_a_ngL(valor, unidad):
     if unidad == "ng/mL":
         return valor * 1000  # Conversión exacta de ng/mL a pg/mL (ng/L)
@@ -29,13 +29,13 @@ def seleccionar_P99(ensayo, genero, referencia):
     elif genero == "Mujer":
         return ensayos_troponinas[ensayo]["P99_mujeres"]
 
-# Función para asegurar que el valor decimal use puntos
-def leer_valor_decimal(valor):
-    valor = valor.replace(',', '.')  # Reemplaza comas por puntos
+# Función para asegurar que el valor decimal use puntos y no comas
+def leer_valor_decimal(prompt):
+    valor = prompt.replace(',', '.')
     try:
         return float(valor)
     except ValueError:
-        st.error("Registro no válido, debe emplear puntos en lugar de comas.")
+        st.error("Registro no válido. Debe emplear puntos en lugar de comas para decimales.")
         return None
 
 # Función para calcular valores diagnósticos
@@ -134,7 +134,17 @@ if acepta_descargo:
         st.header("Preguntas Clínicas")
         edad = st.number_input("Edad del paciente", min_value=18, max_value=120)
         sexo = st.radio("Sexo del paciente", ["Hombre", "Mujer"])
-        historia_clinica = st.radio("Historia clínica", ["No sospechosa (0)", "Sospechosa moderada (1)", "Altamente sospechosa (2)"])
+        
+        # Explicación de las categorías de sospecha en Historia Clínica
+        st.subheader("Historia clínica")
+        st.write("""
+        **No sospechosa (0)**: La historia clínica sugiere que el dolor torácico no está relacionado con una causa cardíaca. Los síntomas pueden ser atípicos o no relacionados con isquemia miocárdica.
+        
+        **Sospechosa moderada (1)**: La historia clínica tiene características que podrían estar relacionadas con isquemia miocárdica, pero no son concluyentes. Puede incluir dolor torácico típico con ciertos factores atenuantes.
+        
+        **Altamente sospechosa (2)**: La historia clínica es muy sugestiva de isquemia miocárdica, con síntomas típicos de angina o un patrón de dolor torácico altamente sugestivo de un síndrome coronario agudo.
+        """)
+        historia_clinica = st.radio("Seleccione el grado de sospecha:", ["No sospechosa (0)", "Sospechosa moderada (1)", "Altamente sospechosa (2)"])
         historia_clinica = int(historia_clinica.split("(")[-1].replace(")", ""))
 
         # Factores de riesgo para HEART score
@@ -174,8 +184,8 @@ if acepta_descargo:
         # Pedir al usuario que seleccione las unidades del P99 que reporta el laboratorio
         unidad_troponina = st.radio("Seleccione las unidades del P99 reportadas por su laboratorio:", ["ng/mL", "pg/mL"])
 
-        troponina = st.number_input("Valor de la primera troponina de alta sensibilidad", min_value=0.0, format="%.2f")
-        troponina = leer_valor_decimal(str(troponina))
+        troponina = st.text_input("Valor de la primera troponina de alta sensibilidad")
+        troponina = leer_valor_decimal(troponina)
         troponina = convertir_a_ngL(troponina, unidad_troponina)  # Conversión de unidades si es necesario
 
         # Seleccionar el P99 según el ensayo y la referencia seleccionada
@@ -191,7 +201,7 @@ if acepta_descargo:
         st.write(f"Puntuación HEAR: {hear_score} (Riesgo de MACE: {riesgo_mace_hear(hear_score)})")
         st.write(f"Puntuación EDACS: {edacs_score} (Riesgo de MACE: {riesgo_mace_edacs(edacs_score)})")
 
-        st.header("Cálculo de riesgo de MACE y valores diagnósticos")
+        st.header("Coeficientes de probabilidad y efectos absolutos de aplicar las escalas, asumiendo prevalencia de infarto del 15%, n: 1000")
         prevalencia = 0.15
         total_pacientes = 1000
 
@@ -240,7 +250,10 @@ if acepta_descargo:
         2. Khaleghi Rad M, Pirmoradi MM, Doosti-Irani A, Thiruganasambandamoorthy V, Mirfazaelian H. The performance of HEAR score for identification of low-risk chest pain: a systematic review and meta-analysis. Eur J Emerg Med. 2022 Jun 1;29(3):173-187. doi: 10.1097/MEJ.00000000000009213.
         
         3. Wang M, Hu Z, Miao L, Shi M, Gao Q. A systematic review of the applicability of emergency department assessment of chest pain score-accelerated diagnostic protocol for risk stratification of patients with chest pain. Clin Cardiol. 2023 Nov;46(11):1303-1309. doi: 10.1002/clc.24126.
+
+        4. Six AJ, Backus BE, Kelder JC. *Chest pain in the emergency room: value of the HEART score*. Neth Heart J. 2008 Jun;16(6):191-6. doi: 10.1007/BF03086144.
         """)
+
 
 
 
